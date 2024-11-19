@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('backgroundtimer.png'); /* Gambar latar */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 0, 0.5); /* Overlay gelap */
+            font-size: 18px; /* Membesarkan saiz teks keseluruhan */
+        }
+
+        #timer {
+            font-size: 80px;
+            font-weight: bold;
+            margin-top: -50px; /* Naikkan timer ke atas */
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            animation: glow 1.5s infinite; /* Kesan "glow" */
+        }
+
+        .label {
+            font-size: 28px;
+            color: #f8f9fa;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .motivational {
+            font-size: 26px; /* Besarkan teks motivasi */
+            color: #00c8ff;
+            margin-top: 20px;
+            font-style: italic;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Tambah bayangan */
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7),
+                             0 0 20px rgba(255, 255, 255, 0.7);
+            }
+            50% {
+                text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7),
+                             0 0 30px rgba(255, 255, 255, 1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">Loading...</div>
+    <div class="label">Countdown to SPM Exam: 2 January 2025</div>
+    <div class="motivational">"Bittaufiq Wan Najah"</div>
+
+    <script>
+        function countdown() {
+            const examDate = new Date("January 2, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = examDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = 
+                    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                document.getElementById("timer").innerHTML = "EXAM STARTED!";
+            }
+        }
+
+        setInterval(countdown, 1000);
+        countdown(); // Update segera selepas load
+    </script>
+</body>
+</html>
